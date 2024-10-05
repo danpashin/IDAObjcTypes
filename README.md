@@ -90,3 +90,5 @@ More to be added as the owner reverses more binaries.
 - sqlite
 - xpc
 - fishhook
+- libmis (not really full)
+- CFNetwork (not really full)
