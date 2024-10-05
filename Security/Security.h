@@ -120,3 +120,14 @@ OSStatus SecCertificateCopyPublicKey(SecCertificateRef certificate, SecKeyRef *k
 #else
 SecKeyRef SecCertificateCopyPublicKey(SecCertificateRef certificate);
 #endif
+
+size_t SecKeyGetBlockSize(SecKeyRef key);
+OSStatus SecKeyDecrypt(SecKeyRef key, SecPadding padding, const uint8_t *cipherText, size_t cipherTextLen, uint8_t *plainText, size_t *plainTextLen);
+OSStatus SecKeyEncrypt(SecKeyRef key, SecPadding padding, const uint8_t *plainText, size_t plainTextLen, uint8_t *cipherText, size_t *cipherTextLen);
+OSStatus SecKeyRawSign(SecKeyRef key, SecPadding padding, const uint8_t *dataToSign, size_t dataToSignLen, uint8_t *sig, size_t *sigLen);
+OSStatus SecKeyGeneratePair(CFDictionaryRef parameters, SecKeyRef *publicKey, SecKeyRef *privateKey);
+
+SecPolicyRef SecPolicyCreateApplePPQService(CFStringRef hostname, CFDictionaryRef context);
+SecPolicyRef SecPolicyCreateApplePPQSigning(void);
+
+OSStatus SecCMSVerifyCopyDataAndAttributes(CFDataRef message, CFDataRef detached_contents, CFTypeRef policy, SecTrustRef *trustref, CFDataRef *attached_contents, CFDictionaryRef *signed_attributes);
