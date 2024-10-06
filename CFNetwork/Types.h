@@ -25,6 +25,7 @@ typedef struct CFURLConnectionHandlerContext;
 typedef struct CFURLDownloadClient;
 typedef struct CFURLProtocolClient;
 typedef struct CFNetServiceClientContext;
+typedef struct CFURLProtocolImplementation;
 
 typedef CFIndex CFURLRequestPriority;
 
