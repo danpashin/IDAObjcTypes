@@ -2,20 +2,19 @@
 #import "Types.h"
 #import "../Foundation/Foundation.h"
 
-// Funcs with unknown signatures
-// amfi_interface_cdhash_in_trustcache
-// amfi_interface_query_bootarg_state
-// amfi_interface_get_local_signing_private_key
-// amfi_interface_get_local_signing_public_key
-// amfi_interface_set_local_signing_public_key
-// amfi_interface_authorize_local_signing
-// amfi_launch_constraint_set_spawnattr
-
 //
 // - AMFI part
 //
 bool amfi_developer_mode_status(void);
 bool amfi_developer_mode_resolved(void);
+
+int amfi_interface_cdhash_in_trustcache(const uint8_t cdhash[], size_t cdhash_len, uint64_t *trustcache_result);
+int amfi_interface_query_bootarg_state(void *state_result);
+int amfi_interface_get_local_signing_private_key(void *private_key_result);
+int amfi_interface_get_local_signing_public_key(void *public_key_result);
+int amfi_interface_set_local_signing_public_key(void *public_key);
+int amfi_interface_authorize_local_signing(void *public_key);
+int amfi_launch_constraint_set_spawnattr( /* posix_spawnattr_t * */void *attr, void *data, size_t datalen);
 
 
 //
@@ -88,14 +87,14 @@ int MISProvisioningProfileGetVersion(MISProfileRef profile);
 //
 Boolean MISAppApprovalState(CFStringRef path, CFDictionaryRef options);
 Boolean MISArrayAllowsEntitlementValue(CFArrayRef entitlements, CFStringRef value);
-Boolean MISBlacklistOverriddenByUser(CFDataRef blacklistData, int someOptions);
+Boolean MISBlacklistOverriddenByUser(CFDataRef blacklist, int someOptions);
 Boolean MISEntitlementDictionaryAllowsEntitlementValue(CFDictionaryRef entitlements, CFStringRef entitlement, CFTypeRef value);
 Boolean MISExistsIndeterminateApps(CFDataRef data, CFTypeRef arg2, Boolean *result);
 Boolean MISUPPTrusted(CFStringRef upp);
 CFStringRef MISCopyErrorStringForErrorCode(MISError error);
 CFStringRef MISCopyErrorStringForErrorCodeUnlocalized(MISError error);
 CFTypeRef CopyMockUDID(void);
-MISError MISBlacklistSetOverride(MISBlacklistDataRef blacklist, NSUInteger haty, Boolean override);
+MISError MISBlacklistSetOverride(CFDataRef blacklist, UInt64 haty, Boolean override);
 MISError MISCopyInstalledProvisioningProfiles(CFArrayRef *profiles);
 MISError MISCopyProvisioningProfile(CFStringRef profileName, MISProfileRef *profile);
 MISError MISCopyProvisioningProfileWithConnection(CFStringRef profileName, MISProfileRef *profile, xpc_connection_t connection);
@@ -104,7 +103,7 @@ MISError MISEnumerateMatchingProfiles(CFDataRef certificate, CFArrayRef predicat
 MISError MISEnumerateMatchingProfilesUnauthoritative(CFDataRef certificate);
 MISError MISInstallProvisioningProfile(MISProfileRef profile);
 MISError MISPing(char **reply);
-MISError MISQueryBlacklistForBundle(CFStringRef path, Boolean flag, Boolean overridenFlag, void **result, MISBlacklistDataRef *blacklist, NSUInteger *haty);
+MISError MISQueryBlacklistForBundle(CFStringRef path, UInt64 someOptions, Boolean overridenFlag, void **result, CFDataRef *blacklist, UInt64 *haty);
 MISError MISQueryBlacklistForCdHash(CFDataRef someData, int someOptions, Boolean overridenFlag, void **result);
 MISError MISRemoveProvisioningProfile(MISProfileRef profile);
 MISError MISValidateSignature(CFStringRef path, CFDictionaryRef options);

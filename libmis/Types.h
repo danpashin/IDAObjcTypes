@@ -3,13 +3,12 @@
 
 typedef const struct _MISProfile *MISProfileRef;
 typedef struct _MISProfile *MISMutableProfileRef;
-typedef const struct _MISBlacklistData *MISBlacklistDataRef;
 
 #define sys_mobiledevice     (0x3A << 26)
 #define sub_mobiledevice_mis (0x02 << 14)
 #define MISMakeError(err) (sys_mobiledevice | sub_mobiledevice_mis | err)
 
-PS_ENUM(int64_t, MISError) {
+PS_ENUM(int, MISError) {
     kMISNoError = 0,
     kMISUnknownError = MISMakeError(0x01),
     kMISNotMutableError = MISMakeError(0x02),
@@ -56,5 +55,9 @@ PS_ENUM(int64_t, MISError) {
     kMISDeveloperModeRequiredError = MISMakeError(0x2B),
 };
 
+typedef struct amfi_cdhash_in_trustcache_ {
+    uint8_t cdhash[20];
+    uint64_t result;
+} amfi_cdhash_in_trustcache_t;
 
 #endif // LIBMIS_H_

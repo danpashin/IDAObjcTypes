@@ -29,3 +29,5 @@ kern_return_t bootstrap_look_up2(mach_port_t bp, const name_t service_name, mach
 boolean_t voucher_mach_msg_set(mach_msg_header_t *msg);
 
 OSThermalNotificationLevel OSThermalNotificationCurrentLevel(void);
+
+int __sandbox_ms(const char *policyname, int call, void *arg);
