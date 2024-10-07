@@ -19,13 +19,55 @@ typedef const struct _CFNetServiceBrowser *CFNetServiceBrowserRef;
 
 typedef struct _CFMutableURLRequest *CFMutableURLRequestRef;
 
-typedef struct CFURLConnectionClient;
-typedef struct CFURLConnectionContext;
-typedef struct CFURLConnectionHandlerContext;
-typedef struct CFURLDownloadClient;
-typedef struct CFURLProtocolClient;
-typedef struct CFNetServiceClientContext;
-typedef struct CFURLProtocolImplementation;
+typedef struct {
+    CFIndex version;
+    const void *clientInfo;
+    CFAllocatorRetainCallBack retain;
+    CFAllocatorReleaseCallBack release;
+    CFAllocatorCopyDescriptionCallBack copyDescription;
+} CFURLConnectionClient;
+typedef struct {
+    CFIndex version;
+    const void *info;
+    CFAllocatorRetainCallBack retain;
+    CFAllocatorReleaseCallBack release;
+    CFAllocatorCopyDescriptionCallBack copyDescription;
+} CFURLConnectionContext;
+typedef struct {
+    CFIndex version;
+    const void *info;
+    CFAllocatorRetainCallBack retain;
+    CFAllocatorReleaseCallBack release;
+    CFAllocatorCopyDescriptionCallBack copyDescription;
+} CFURLConnectionHandlerContext;
+typedef struct {
+    CFIndex version;
+    const void *info;
+    CFAllocatorRetainCallBack retain;
+    CFAllocatorReleaseCallBack release;
+    CFAllocatorCopyDescriptionCallBack copyDescription;
+} CFURLDownloadClient;
+typedef struct {
+    CFIndex version;
+    const void *info;
+    CFAllocatorRetainCallBack retain;
+    CFAllocatorReleaseCallBack release;
+    CFAllocatorCopyDescriptionCallBack copyDescription;
+} CFURLProtocolClient;
+typedef struct {
+    CFIndex version;
+    const void *info;
+    CFAllocatorRetainCallBack retain;
+    CFAllocatorReleaseCallBack release;
+    CFAllocatorCopyDescriptionCallBack copyDescription;
+} CFNetServiceClientContext;
+typedef struct {
+    CFIndex version;
+    const void *info;
+    CFAllocatorRetainCallBack retain;
+    CFAllocatorReleaseCallBack release;
+    CFAllocatorCopyDescriptionCallBack copyDescription;
+} CFURLProtocolImplementation;
 
 typedef CFIndex CFURLRequestPriority;
 

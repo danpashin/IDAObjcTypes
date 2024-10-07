@@ -87,14 +87,13 @@ int MISProvisioningProfileGetVersion(MISProfileRef profile);
 //
 Boolean MISAppApprovalState(CFStringRef path, CFDictionaryRef options);
 Boolean MISArrayAllowsEntitlementValue(CFArrayRef entitlements, CFStringRef value);
-Boolean MISBlacklistOverriddenByUser(CFDataRef blacklist, int someOptions);
+Boolean MISBlacklistOverriddenByUser(CFDataRef cdhash, int someOptions);
 Boolean MISEntitlementDictionaryAllowsEntitlementValue(CFDictionaryRef entitlements, CFStringRef entitlement, CFTypeRef value);
 Boolean MISExistsIndeterminateApps(CFDataRef data, CFTypeRef arg2, Boolean *result);
 Boolean MISUPPTrusted(CFStringRef upp);
 CFStringRef MISCopyErrorStringForErrorCode(MISError error);
 CFStringRef MISCopyErrorStringForErrorCodeUnlocalized(MISError error);
 CFTypeRef CopyMockUDID(void);
-MISError MISBlacklistSetOverride(CFDataRef blacklist, UInt64 haty, Boolean override);
 MISError MISCopyInstalledProvisioningProfiles(CFArrayRef *profiles);
 MISError MISCopyProvisioningProfile(CFStringRef profileName, MISProfileRef *profile);
 MISError MISCopyProvisioningProfileWithConnection(CFStringRef profileName, MISProfileRef *profile, xpc_connection_t connection);
@@ -103,8 +102,6 @@ MISError MISEnumerateMatchingProfiles(CFDataRef certificate, CFArrayRef predicat
 MISError MISEnumerateMatchingProfilesUnauthoritative(CFDataRef certificate);
 MISError MISInstallProvisioningProfile(MISProfileRef profile);
 MISError MISPing(char **reply);
-MISError MISQueryBlacklistForBundle(CFStringRef path, UInt64 someOptions, Boolean overridenFlag, void **result, CFDataRef *blacklist, UInt64 *haty);
-MISError MISQueryBlacklistForCdHash(CFDataRef someData, int someOptions, Boolean overridenFlag, void **result);
 MISError MISRemoveProvisioningProfile(MISProfileRef profile);
 MISError MISValidateSignature(CFStringRef path, CFDictionaryRef options);
 MISError MISValidateSignatureAndCopyInfo(CFStringRef path, CFDictionaryRef options, CFDictionaryRef *info);
@@ -112,3 +109,9 @@ MISError MISValidateSignatureAndCopyInfoWithProgress(CFStringRef path, CFDiction
 MISError MISValidationCopySignatureVersion(CFStringRef path, CFTypeRef signatureVersion);
 void MISEnumerateTrustedUPPs(void *enumBlock);
 void MISSetUPPTrust(CFStringRef upp, Boolean trust);
+
+// idk what the haty is. It often refers to 0x1a fallback which can't be CommonCrypto "hash type". Or it is?
+// In XPC it is really called haty
+MISError MISQueryBlacklistForBundle(CFStringRef path, UInt64 someOptions, Boolean overridenFlag, void **result, CFDataRef *cdhash, UInt64 *haty);
+MISError MISQueryBlacklistForCdHash(CFDataRef cdhash, UInt64 haty, Boolean overridenFlag, void **result);
+MISError MISBlacklistSetOverride(CFDataRef cdhash, UInt64 haty, Boolean override);
